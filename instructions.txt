@@ -1,0 +1,12 @@
+This system is based on two separate processes, a client and server that use an elgamal module.
+To start system, the server is run without any command line parameters and it bind the local host.
+If the client is then run, it will automatically bind to the socket the server has created on the local host.
+From here, the process is entirely automated. The Server takes the role of P2 and the client of P1. The client 
+generate a 256 bit prime number and a generator for the cyclic group created by that prime. A random element 
+mod p is then selected as the private key for the client. With this, a public key is generated that is then 
+sent to the server. The server uses the public key received to generate its own private key. Along with this,
+the server generates a key for AES encryption. The key is encrypted using the public key from the client
+and a private one it has generated. The encrypted AES key is then sent back to the client along with the
+servers public key. The client can use this to decrypt the key and they now have securely exchanged an aes key.
+After an AES key is exchanged via elgamal both the client and the server will both send a message to the other 
+using AES encryption. The encrypted text and then the plain text is displayed on both end. 
